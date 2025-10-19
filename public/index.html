@@ -2,8 +2,31 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="%PUBLIC_URL%/ee.ico?v=2" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-1439908057186049">
+     <!-- 구글 서치 콘솔 & SEO -->
+  <meta name="description" content="하루 목표 달력 웹사이트. 달력에서 날짜를 선택하고 목표를 정해 실천하며 성공을 기록하세요." />
+  <meta name="keywords" content="하루 목표, 달력, 목표 달성, 계획, 일정, 성공 기록, 온라인 달력" />
+  <meta name="author" content="YourName" />
+
+  <!-- Open Graph (SNS 공유용) -->
+  <meta property="og:title" content="하루 목표 달력 웹사이트" />
+  <meta property="og:description" content="날짜를 선택하고 목표를 설정, 실천, 성공 기록까지 가능한 달력 웹사이트" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-website.com" />
+  <meta property="og:image" content="https://day2-omega-livid.vercel.app/thumbnail.png" />
+
+  <!-- 트위터 카드 -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="하루 목표 달력 웹사이트" />
+  <meta name="twitter:description" content="날짜별 목표 설정과 실천, 성공 기록이 가능한 달력 웹사이트" />
+  <meta name="twitter:image" content="https://day2-omega-livid.vercel.app/thumbnail.png" />
+
+  
     <title>Calendar Exercise</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1439908057186049"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
@@ -36,97 +59,150 @@
             border: 2px solid #333;
             color: #333;
         }
+        /* 광고를 양옆에 고정하기 위한 스타일 추가 */
+        .side-ad {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
     </style>
 </head>
 <body class="bg-white min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <!-- 헤더 -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Calendar Exercise</h1>
-            <p class="text-gray-600">Set and achieve your daily goals!</p>
-        </div>
+    <!-- 3단 레이아웃: 왼쪽 광고, 중앙 콘텐츠, 오른쪽 광고 -->
+    <div class="flex justify-center gap-4 px-4">
+        <!-- 왼쪽 광고 (데스크톱에서만 표시) -->
+        <aside class="hidden xl:block w-64 flex-shrink-0">
+            <div class="side-ad">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1439908057186049"
+                    data-ad-slot="8157700030"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </aside>
 
-        <!-- 오늘의 목표 버튼 -->
-        <div class="text-center mb-8">
-            <button id="todayGoalBtn" class="bg-white text-gray-800 border-2 border-gray-300 px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-gray-50 transform hover:scale-105 transition-all duration-300">
-                Set Today's Goal
-            </button>
-        </div>
+        <!-- 중앙 메인 콘텐츠 -->
+        <main class="flex-1 max-w-4xl py-8">
+            <!-- 헤더 -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">Calendar Exercise</h1>
+                <p class="text-gray-600">Set and achieve your daily goals!</p>
+            </div>
 
-        <!-- 달력 -->
-        <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 max-w-4xl mx-auto">
-            <div class="flex justify-between items-center mb-6">
-                <button id="prevMonth" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
+            <!-- 오늘의 목표 버튼 -->
+            <div class="text-center mb-8">
+                <button id="todayGoalBtn" class="bg-white text-gray-800 border-2 border-gray-300 px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-gray-50 transform hover:scale-105 transition-all duration-300">
+                    Set Today's Goal
                 </button>
-                <h2 id="currentMonth" class="text-2xl font-bold text-gray-800"></h2>
-                <button id="nextMonth" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
             </div>
-            
-            <div class="grid grid-cols-7 gap-2 mb-4">
-                <div class="text-center font-semibold text-gray-600 py-2">Sun</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Mon</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Tue</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Wed</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Thu</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Fri</div>
-                <div class="text-center font-semibold text-gray-600 py-2">Sat</div>
-            </div>
-            
-            <div id="calendarGrid" class="grid grid-cols-7 gap-2">
-                <!-- 달력 날짜들이 여기에 생성됩니다 -->
-            </div>
-        </div>
 
-        <!-- 선택된 날짜 정보 -->
-        <div id="selectedDateInfo" class="bg-white rounded-2xl shadow-xl p-6 max-w-2xl mx-auto mb-8 hidden">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Selected Date: <span id="selectedDateText"></span></h3>
-            <div id="goalsList" class="space-y-3">
-                <!-- 목표들이 여기에 표시됩니다 -->
-            </div>
-        </div>
-
-        <!-- 목표 설정 모달 -->
-        <div id="goalModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Set Goal</h3>
+            <!-- 달력 -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <button id="prevMonth" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <h2 id="currentMonth" class="text-2xl font-bold text-gray-800"></h2>
+                    <button id="nextMonth" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
                 
-                <!-- 카테고리 선택 -->
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Select Category</label>
-                    <div class="grid grid-cols-2 gap-3 mb-3">
-                        <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium" data-category="Exercise">🏃‍♂️ Exercise</button>
-                        <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium" data-category="Music">🎵 Music</button>
-                    </div>
-                    <div class="flex gap-3">
-                        <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium flex-1" data-category="Other">📝 Other</button>
-                        <input id="customCategory" type="text" placeholder="Custom input" class="px-4 py-3 border border-gray-300 rounded-lg flex-1 hidden">
-                    </div>
+                <div class="grid grid-cols-7 gap-2 mb-4">
+                    <div class="text-center font-semibold text-gray-600 py-2">Sun</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Mon</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Tue</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Wed</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Thu</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Fri</div>
+                    <div class="text-center font-semibold text-gray-600 py-2">Sat</div>
                 </div>
-
-                <!-- 목표 입력 -->
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Goal Content</label>
-                    <textarea id="goalContent" placeholder="Enter today's goal..." class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none h-24"></textarea>
+                
+                <div id="calendarGrid" class="grid grid-cols-7 gap-2">
+                    <!-- 달력 날짜들이 여기에 생성됩니다 -->
                 </div>
+            </div>
 
-                <!-- 시간 설정 -->
-                <div class="mb-6">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Goal Time</label>
-                    <input id="goalTime" type="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+            <!-- 선택된 날짜 정보 -->
+            <div id="selectedDateInfo" class="bg-white rounded-2xl shadow-xl p-6 mb-8 hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Selected Date: <span id="selectedDateText"></span></h3>
+                <div id="goalsList" class="space-y-3">
+                    <!-- 목표들이 여기에 표시됩니다 -->
                 </div>
+            </div>
 
-                <!-- 버튼들 -->
+            <!-- 모바일용 광고 (하단에만 표시) -->
+            <div class="xl:hidden mb-8">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1439908057186049"
+                    data-ad-slot="8157700030"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </main>
+
+        <!-- 오른쪽 광고 (데스크톱에서만 표시) -->
+        <aside class="hidden xl:block w-64 flex-shrink-0">
+            <div class="side-ad">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-1439908057186049"
+                    data-ad-slot="8157700030"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 목표 설정 모달 -->
+    <div id="goalModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Set Goal</h3>
+            
+            <!-- 카테고리 선택 -->
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-3">Select Category</label>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium" data-category="Exercise">🏃‍♂️ Exercise</button>
+                    <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium" data-category="Music">🎵 Music</button>
+                </div>
                 <div class="flex gap-3">
-                    <button id="cancelGoal" class="flex-1 px-4 py-3 bg-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-400 transition-colors">Cancel</button>
-                    <button id="saveGoal" class="flex-1 px-4 py-3 bg-white border-2 border-gray-300 text-gray-800 rounded-lg font-semibold hover:bg-gray-50 hover:shadow-lg transition-all">Save</button>
+                    <button class="category-btn bg-gray-100 hover:bg-gray-200 px-4 py-3 rounded-lg font-medium flex-1" data-category="Other">📝 Other</button>
+                    <input id="customCategory" type="text" placeholder="Custom input" class="px-4 py-3 border border-gray-300 rounded-lg flex-1 hidden">
                 </div>
+            </div>
+
+            <!-- 목표 입력 -->
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Goal Content</label>
+                <textarea id="goalContent" placeholder="Enter today's goal..." class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none h-24"></textarea>
+            </div>
+
+            <!-- 시간 설정 -->
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Goal Time</label>
+                <input id="goalTime" type="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+            </div>
+
+            <!-- 버튼들 -->
+            <div class="flex gap-3">
+                <button id="cancelGoal" class="flex-1 px-4 py-3 bg-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-400 transition-colors">Cancel</button>
+                <button id="saveGoal" class="flex-1 px-4 py-3 bg-white border-2 border-gray-300 text-gray-800 rounded-lg font-semibold hover:bg-gray-50 hover:shadow-lg transition-all">Save</button>
             </div>
         </div>
     </div>
@@ -376,3 +452,7 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f62ccc67aaea2c',t:'MTc1NzkxODg3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+<a href="https://www.youtube.com/@give-w11" target="_blank" rel="noopener noreferrer" style="position: fixed; top: 20px; left: 20px; text-decoration: none; background: rgba(255, 255, 255, 0.9); padding: 12px 16px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); transition: all 0.3s ease; backdrop-filter: blur(10px);" onmouseover="this.style.background='rgba(255, 255, 255, 1)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 0, 0, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.transform='translateY(0px)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.15)'">
+    <div style="font-size: 12px; color: #1e40af; font-weight: 500; font-family: Arial, sans-serif; margin-bottom: 2px;">Going to my YouTube</div>
+    <div style="font-size: 14px; color: #333; font-weight: 600; font-family: 'Malgun Gothic', '맑은 고딕', Dotum, sans-serif;">나의 유튜브로 가기</div>
+</a>
